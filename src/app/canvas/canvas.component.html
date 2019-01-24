@@ -1,1 +1,12 @@
+<div class="estilo">
+  estas en sala: {{user.sala}}
+  <input [(ngModel)]="user.color"type="color" name="favcolor">
+  &ngsp;
+  <button mat-raised-button color="primary" (click)="bajarTam()" class="boton">-</button>
+  {{user.tam}}
+  <button mat-raised-button color="primary" (click)="subirTam()" class="boton">+</button>
+  &ngsp;
+  <button mat-raised-button color="primary" (click)="borrar()" class="boton">Borrar</button>
+  <br>
+</div>
 <canvas #canvas width="1400" height="720"></canvas>
