@@ -5,7 +5,8 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class ConexionBDService {
-  private url = 'http://192.168.0.5:8000/pizarraServer';
+  //private url = 'http://192.168.0.5:8000/pizarraServer';
+  private url = 'http://raspberrytronxi.ddns.net:8000/pizarraServer';
   constructor(private http: HttpClient) { }
 
   comprobarPizarra(nombre: string) {
