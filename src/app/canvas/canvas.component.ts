@@ -14,7 +14,7 @@ export class CanvasComponent implements OnInit, AfterViewInit, OnDestroy {
   color: any;
   cx: CanvasRenderingContext2D;
   constructor(private socket: SocketService,
-              private user: DatosUsuarioService,
+              public user: DatosUsuarioService,
               private conex: ConexionBDService) { }
 
   ngOnInit() {
