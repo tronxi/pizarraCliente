@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class DatosUsuarioService {
   sala: string;
-  color: string;
+  color = '#000000';
   tam = 1;
   constructor() { }
 }

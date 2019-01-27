@@ -11,7 +11,6 @@ import {ConexionBDService} from '../conexion-bd.service';
 export class CanvasComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('canvas') public canvas: ElementRef;
-  color: any;
   cx: CanvasRenderingContext2D;
   constructor(private socket: SocketService,
               public user: DatosUsuarioService,
@@ -23,7 +22,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, OnDestroy {
     this.socket.iniciar(this.user.sala);
     const cn = this.canvas.nativeElement;
     this.cx = cn.getContext('2d');
-    this.cx.strokeRect(0,0, cn.width, cn.height);
     this.socket.onDibujarPunto()
       .subscribe((message) => {
         const json = JSON.parse(message);
@@ -31,7 +29,10 @@ export class CanvasComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     this.socket.onRecibirDatosIniciales()
       .subscribe((message) => {
-        this.cx.clearRect(0,0, cn.width, cn.height);
+        this.cx.lineWidth = 1;
+        this.cx.fillStyle = '#FFFFFF';
+        this.cx.fillRect(0,0, cn.width, cn.height);
+        this.cx.strokeStyle = '#000000';
         this.cx.strokeRect(0,0, cn.width, cn.height);
         for (let i = 1; i < message.length; i++) {
           this.dibujar(message[i].antx, message[i].anty, message[i].x, message[i].y,
@@ -39,7 +40,6 @@ export class CanvasComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
   }
-
   ngOnDestroy(): void {
     this.socket.salir(this.user.sala);
     this.user.sala = null;
@@ -47,6 +47,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public dibujar(aX, aY, x, y, color, tam) {
     this.cx.beginPath();
+    this.cx.lineJoin = 'round';
+    this.cx.lineCap = 'round';
     this.cx.moveTo(aX, aY);
     this.cx.lineTo(x, y);
     this.cx.lineWidth = tam;
@@ -66,6 +68,8 @@ export class CanvasComponent implements OnInit, AfterViewInit, OnDestroy {
       cx.beginPath();
       cx.moveTo(aX, aY);
       cx.lineTo(x, y);
+      cx.lineJoin = 'round';
+      cx.lineCap = 'round';
       cx.lineWidth = user.tam;
       cx.strokeStyle = user.color;
       cx.stroke();
