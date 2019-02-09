@@ -10,7 +10,7 @@ export class SocketService {
 
   public initSocket(): void {
     //this.socket = io('http://192.168.0.5', {path: '/pizarraServer_socket'});
-    his.socket = io('http://raspberrytronxi.ddns.net', {path: '/pizarraServer_socket'});
+    this.socket = io('http://raspberrytronxi.ddns.net', {path: '/pizarraServer_socket'});
   }
   public nuevoPunto(punto): void {
     this.socket.emit('nuevo-punto', punto);
