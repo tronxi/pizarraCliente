@@ -1,23 +1,28 @@
 <div class="estilo">
-  estas en sala: {{user.sala}}
-  <input [(ngModel)]="user.color"type="color" name="favcolor">
-  &ngsp;
-  <button mat-raised-button color="primary" (click)="bajarTam()" class="boton">-</button>
-  {{user.tam}}
-  <button mat-raised-button color="primary" (click)="subirTam()" class="boton">+</button>
-  &ngsp;
-  <button mat-raised-button color="primary" (click)="borrar()" class="boton">Borrar</button>
-  <br>
+  <h1>
+    {{user.sala}}
+  </h1>
 </div>
-<div class="row">
 
-  <canvas #canvas width="1000" height="720" class="col-lg-10"></canvas>
-  <div class="col-lg-2">
-    <textarea rows="200" cols="400" class="pre-scrollable form-control" #conversacionArea style="resize: none;" disabled>{{mensajes}}
+<div class="fila">
+  <canvas #canvas width="1000" height="700" class=""></canvas>
+  <div>
+    <textarea rows="50" cols="10" class="pre-scrollable form-control" #conversacionArea style="resize: none;" disabled>{{mensajes}}
     </textarea>
   <mat-form-field>
-    <input matInput [(ngModel)]="mensajeTexto" placeholder="Mensaje" type="text">
+    <input matInput [(ngModel)]="mensajeTexto" placeholder="Mensaje" type="text" autocomplete="off" (keydown.enter)="sendMessage()">
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="sendMessage()" class="boton">Enviar</button>
+  <button mat-raised-button color="primary" type="submit" (click)="sendMessage()" class="boton">Enviar</button>
+    <br/>
+    <input [(ngModel)]="user.color"type="color" name="favcolor">
+    <br/>
+    <br/>
+    <button mat-raised-button color="primary" (click)="bajarTam()" class="boton">-</button>
+    {{user.tam}}
+    <button mat-raised-button color="primary" (click)="subirTam()" class="boton">+</button>
+    <br />
+    <br/>
+    <button mat-raised-button color="primary" (click)="borrar()" class="boton">Borrar</button>
+    <br>
   </div>
 </div>

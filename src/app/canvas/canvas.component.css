@@ -2,3 +2,9 @@
   margin: 4px;
   padding: 4px;
 }
+
+div.fila {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
