@@ -11,7 +11,11 @@ import {ConexionBDService} from '../conexion-bd.service';
 export class CanvasComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('canvas') public canvas: ElementRef;
+  @ViewChild('conversacionArea') area: ElementRef;
   cx: CanvasRenderingContext2D;
+  mensajeTexto: string;
+  mensajes = '';
+
   constructor(private socket: SocketService,
               public user: DatosUsuarioService,
               private conex: ConexionBDService) { }
@@ -38,6 +42,12 @@ export class CanvasComponent implements OnInit, AfterViewInit, OnDestroy {
           this.dibujar(message[i].antx, message[i].anty, message[i].x, message[i].y,
             message[i].color, message[i].tam);
         }
+      });
+    this.socket.onMessage()
+      .subscribe((message) => {
+        console.log(message);
+        this.mensajes += message + '\n';
+        this.area.nativeElement.scrollTop = this.area.nativeElement.scrollHeight;
       });
   }
   ngOnDestroy(): void {
@@ -135,6 +145,13 @@ export class CanvasComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.user.tam >= 2) {
       this.user.tam--;
     }
+  }
+
+  public sendMessage(): void {
+    const json = JSON.stringify({sala: this.user.sala,
+      mensaje: this.mensajeTexto});
+    this.socket.send(json);
+    this.mensajeTexto = '';
   }
 
   borrar() {

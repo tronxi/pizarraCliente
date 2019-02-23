@@ -9,4 +9,15 @@
   <button mat-raised-button color="primary" (click)="borrar()" class="boton">Borrar</button>
   <br>
 </div>
-<canvas #canvas width="1400" height="720"></canvas>
+<div class="row">
+
+  <canvas #canvas width="1000" height="720" class="col-lg-10"></canvas>
+  <div class="col-lg-2">
+    <textarea rows="200" cols="400" class="pre-scrollable form-control" #conversacionArea style="resize: none;" disabled>{{mensajes}}
+    </textarea>
+  <mat-form-field>
+    <input matInput [(ngModel)]="mensajeTexto" placeholder="Mensaje" type="text">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="sendMessage()" class="boton">Enviar</button>
+  </div>
+</div>

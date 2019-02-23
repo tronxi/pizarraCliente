@@ -28,9 +28,19 @@ export class SocketService {
     this.socket.emit('salir', sala);
   }
 
+  public send(message): void {
+    this.socket.emit('new-message', message);
+  }
+
   public onDibujarPunto(): Observable<any> {
     return new Observable<any>(observer => {
       this.socket.on('dibujar-punto', (data) => observer.next(data));
+    });
+  }
+
+  public onMessage(): Observable<any> {
+    return new Observable<any>(observer => {
+      this.socket.on('message', (data) => observer.next(data));
     });
   }
 
